@@ -1,0 +1,39 @@
+GET http://localhost:3003/api/blogs
+
+###
+
+POST http://localhost:3003/api/blogs Content-type: application/json Authorization: bearer (token goes here)
+
+{
+"title": "testBlog", "author": "tuperuser", "url": "http://url.com", "likes": 123,
+}
+
+###
+
+POST http://localhost:3003/api/users Content-type: application/json
+
+{
+"notes": [], "username": "root", "name": "tuperuser", "password": "S1!lainen"
+}
+
+###
+
+POST http://localhost:3003/api/login Content-type: application/json
+
+{
+"username": "root", "password": "S1!lainen"
+}
+
+###
+
+PUT http://localhost:3003/api/blogs/6156fe1ff5a7455e7a423567 Content-type: application/json
+
+{
+"likes": 0
+}
+
+### POST http://localhost:3003/api/blogs/617294b0f0aba859ff90b65c/comments Content-type: application/json
+
+{
+"comment": "newcomment"
+}

@@ -1,0 +1,37 @@
+{
+    "name": "bloglist",
+    "version": "0.0.1",
+    "description": "online blog review/sharing application",
+    "main": "index.js",
+    "scripts": {
+        "start": "cross-env NODE_ENV=production node index.js",
+        "dev": "cross-env NODE_ENV=development nodemon index.js",
+        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+        "lint": "eslint .",
+        "start:test": "cross-env NODE_ENV=test node index.js",
+        "cypress:open": "cypress open",
+        "test:e2e": "cypress run"
+    },
+    "author": "jamessl154",
+    "license": "MIT",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.0.6",
+        "mongoose-unique-validator": "github:blakehaswell/mongoose-unique-validator#pull/128/head"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3",
+        "cypress": "^9.2.0",
+        "eslint": "^7.32.0",
+        "jest": "^27.2.0",
+        "nodemon": "^2.0.12",
+        "supertest": "^6.1.6"
+    },
+    "jest": {
+        "testEnvironment": "node"
+    }
+}
