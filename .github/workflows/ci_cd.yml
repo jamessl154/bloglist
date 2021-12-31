@@ -19,7 +19,7 @@ jobs:
       - name: npm install
         run: npm install
       - name: lint
-        run: npm run eslint
+        run: npm run lint
       - name: jest integration tests
         run: npm run test
       - name: build
