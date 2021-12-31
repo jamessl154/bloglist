@@ -5,10 +5,11 @@ describe('On visit to the blog app,', function() {
     beforeEach(function() {
       // reset the DB
       cy.request('POST', 'http://localhost:3003/api/testing/reset')
-      cy.visit('http://localhost:3000')
+      cy.visit('http://localhost:3003')
     })
   
     it('the login form is shown', function() {
+      cy.contains('Login').click()
       cy.get('[data-cy=loginForm]').contains('Login')
     })
   
@@ -25,6 +26,7 @@ describe('On visit to the blog app,', function() {
         }
   
         cy.request('POST', 'http://localhost:3003/api/users/', user)
+        cy.contains('Login').click()
       })
   
       it('succeeds with correct credentials', function() {
@@ -56,7 +58,7 @@ describe('On visit to the blog app,', function() {
           }
   
           cy.createBlog(blog)
-          cy.get('.bloglist')
+          cy.get('.blogGrid')
             .contains('cypressTestTitle')
             .contains('cypressTestAuthor')
         })
@@ -69,7 +71,7 @@ describe('On visit to the blog app,', function() {
               url: 'cypressTestUrl'
             }
             cy.createBlog(blog)
-            cy.contains('View').click()
+            cy.contains('+').click()
           })
   
           it('clicking the like button increments total likes by 1', function() {
@@ -85,7 +87,7 @@ describe('On visit to the blog app,', function() {
             cy.get('[data-cy=removeButton]').click()
             // https://stackoverflow.com/a/60862270
             cy.on('window:confirm', () => true)
-            cy.get('.bloglist')
+            cy.get('.blogGrid')
               .should('not.contain', 'cypressTestTitle')
               .should('not.contain', 'cypressTestAuthor')
           })
@@ -105,7 +107,7 @@ describe('On visit to the blog app,', function() {
             describe('When boot expands a blog added by mluukkai,', function() {
   
               beforeEach(function() {
-                cy.contains('View').click()
+                cy.contains('+').click()
               })
               it('he has no option to remove it', function() {
                 cy.get('[data-cy=removeButton]').should('not.exist')
@@ -143,17 +145,17 @@ describe('On visit to the blog app,', function() {
   
       cy.createBlog(blog1)
       cy.createBlog(blog2)
-      cy.contains('View').click()
+      cy.contains('+').click()
       // first view disappears
-      cy.contains('View').click()
+      cy.contains('+').click()
     })
   
     it('blogs are re-sorted by number of likes', function() {
   
-      // getting the first element with .blogClass class on the page
-      cy.get('.blogClass:first')
+      // getting the first element with .blog class on the page
+      cy.get('.blog:first')
         .contains('cypressTestTitle')
-      cy.get('.blogClass2:first')
+      cy.get('.blog:first')
         .contains('Total Likes: 0')
   
       // sardinia blog is initially underneath cypress blog
@@ -162,9 +164,9 @@ describe('On visit to the blog app,', function() {
       cy.get('[data-cy=sardiniaTestTitle]').find('[data-cy=likeButton]').click()
       // wait 1 second after clicks
       cy.wait(100)
-      cy.get('.blogClass:first')
+      cy.get('.blog:first')
         .contains('sardiniaTestTitle')
-      cy.get('.blogClass2:first')
+      cy.get('.blog:first')
         .contains('Total Likes: 1')
   
       // After liking the cypress blog twice, it goes on top again
@@ -172,16 +174,16 @@ describe('On visit to the blog app,', function() {
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
       cy.wait(100)
       // blogs with the same likes are not re-sorted
-      cy.get('.blogClass:first')
+      cy.get('.blog:first')
         .contains('sardiniaTestTitle')
-      cy.get('.blogClass2:first')
+      cy.get('.blog:first')
         .contains('Total Likes: 1')
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
       cy.wait(100)
       // cypress has 2 likes and sardinia has 1, cypress is on top
-      cy.get('.blogClass:first')
+      cy.get('.blog:first')
         .contains('cypressTestTitle')
-      cy.get('.blogClass2:first')
+      cy.get('.blog:first')
         .contains('Total Likes: 2')
     })
   })
@@ -196,7 +198,7 @@ describe('On visit to the blog app,', function() {
       localStorage.setItem('loggedInBloglistUser', JSON.stringify(body))
     })
   
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
   
   Cypress.Commands.add('createBlog', (blog) => {
@@ -210,5 +212,5 @@ describe('On visit to the blog app,', function() {
       }
     })
   
-    cy.visit('http://localhost:3000')
+    cy.visit('http://localhost:3003')
   })
