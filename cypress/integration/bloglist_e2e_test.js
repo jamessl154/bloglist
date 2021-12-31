@@ -7,24 +7,59 @@ describe('On visit to the blog app,', function() {
       cy.request('POST', 'http://localhost:3003/api/testing/reset')
       cy.visit('http://localhost:3003')
     })
-  
+
     it('the login form is shown', function() {
       cy.contains('Login').click()
       cy.get('[data-cy=loginForm]').contains('Login')
     })
-  
+
+    it('the register form is shown', function() {
+      cy.contains('Register').click()
+      cy.get('[data-cy=registerForm]').contains('Register')
+    })
+
+    describe('When registering,', function() {
+
+      beforeEach(function() {
+        cy.contains('Register').click()
+      })
+
+      it('succeeds with the correct credentials', function() {
+        cy.get('#username').type('mluukkai')
+        cy.get('#password').type('S1!lainen')
+        cy.get('#confirmation').type('S1!lainen')
+        cy.get('[data-cy=registerButton]').click()
+        cy.get('.MuiAlert-message').contains('mluukkai registered and logged in successfully!')
+      })
+
+      it('fails with non-matching passwords', function() {
+        cy.get('#username').type('mluukkai')
+        cy.get('#password').type('not')
+        cy.get('#confirmation').type('matching')
+        cy.get('[data-cy=registerButton]').click()
+        cy.get('.MuiAlert-message').contains('Password and Confirmation Password do not match')
+      })
+
+      it('fails with a weak password credentials', function() {
+        cy.get('#username').type('mluukkai')
+        cy.get('#password').type('weak password')
+        cy.get('#confirmation').type('weak password')
+        cy.get('[data-cy=registerButton]').click()
+        cy.get('.MuiAlert-message').contains('Password must contain at least 1 upper case, 1 lower case, 1 numeric and 1 symbol character')
+      })
+    })
+
     // https://docs.cypress.io/guides/getting-started/testing-your-app#Fully-test-the-login-flow-but-only-once
     describe('When logging in,', function() {
   
       beforeEach(function() {
-        // create user, bypass UI because we currently have no UI to register new users
         // test manual login flow once here
         const user = {
           name: 'Matti Luukkainen',
           username: 'mluukkai',
           password: 'S1!lainen'
         }
-  
+
         cy.request('POST', 'http://localhost:3003/api/users/', user)
         cy.contains('Login').click()
       })
