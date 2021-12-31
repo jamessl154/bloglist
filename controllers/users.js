@@ -2,12 +2,21 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 const helper = require('../utils/api_test_helper')
+const jwt = require('jsonwebtoken')
 
 usersRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   // Regex checker for password strength before the password is hashed
   const testPass = helper.strongPassword(body.password)
+
+  const takenUsername = await User.findOne({ username: body.username })
+
+  if (takenUsername) {
+    return response.status(409).json({
+      error: 'This username is taken, please choose another'
+    })
+  }
 
   if(!testPass) {
     return response.status(400).json({
@@ -27,7 +36,18 @@ usersRouter.post('/', async (request, response, next) => {
 
   try {
     const savedUser = await user.save()
-    response.json(savedUser)
+
+    const userForToken = {
+      username: savedUser.username,
+      id: savedUser._id,
+    }
+
+    const token = jwt.sign(userForToken, process.env.SECRET)
+
+    response
+      .status(200)
+      .send({ token, username: savedUser.username, name: savedUser.name })
+
   } catch(exception) {
     next(exception)
   }
