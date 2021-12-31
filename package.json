@@ -4,11 +4,12 @@
     "description": "online blog review/sharing application",
     "main": "index.js",
     "scripts": {
-        "start": "cross-env NODE_ENV=production node index.js",
-        "dev": "cross-env NODE_ENV=development nodemon index.js",
-        "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+        "start": "NODE_ENV=production node index.js",
+        "start-windows": "cross-env NODE_ENV=production node index.js",
+        "dev": "NODE_ENV=development nodemon index.js",
+        "test": "NODE_ENV=test jest --verbose --runInBand",
         "lint": "eslint .",
-        "start:test": "cross-env NODE_ENV=test node index.js",
+        "start:test": "NODE_ENV=test node index.js",
         "cypress:open": "cypress open",
         "test:e2e": "cypress run"
     },
