@@ -53,10 +53,10 @@ describe('when there is initially one user in db', () => {
     const result = await api
       .post('/api/users')
       .send(newUser)
-      .expect(400)
+      .expect(409)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('`username` to be unique')
+    expect(result.body.error).toContain('This username is taken, please choose another')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
@@ -111,7 +111,7 @@ describe('when there is initially one user in db', () => {
     const usersAtStart = await helper.usersInDb()
 
     const newUser = {
-      username: 'root',
+      username: 'boot',
       name: 'Superuser',
       password: 'Blablallasas',
     }
