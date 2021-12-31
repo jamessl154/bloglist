@@ -1,1 +1,49 @@
-# TODO
+name: ci/cd
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: jest integration tests
+        run: npm run test
+      - name: build
+        run: npm run build
+      - name: cypress e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: npm run start:test
+          command: npm run test:e2e
+          wait-on: 'http://localhost:3003'
+      - name: deploy to heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name:
+          heroku_email: ${{ secrets.EMAIL }}
+          healthcheck: "https://infinite-ravine-93237.herokuapp.com/health"
+          checkstring: "Healthy!"
+          rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
