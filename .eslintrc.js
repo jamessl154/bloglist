@@ -1,28 +1,38 @@
 module.exports = {
   'env': {
-    'node': true,
-    'commonjs': true,
-    'es2021': true,
-    'jest': true
+    'browser': true,
+    'es6': true,
+    'jest/globals': true
   },
-  'extends': 'eslint:recommended',
+  // https://eslint.org/docs/rules/no-process-env
+  'globals': {
+    'process': true
+  },
+  'extends': [
+    'eslint:recommended',
+    'plugin:react/recommended'
+  ],
+  // https://github.com/yannickcr/eslint-plugin-react/pull/2114/commits/40f25659b9c801131bb0abed2030fdc54d88a074
+  'settings': {
+    'react': {
+      'version': 'detect',
+    },
+  },
   'parserOptions': {
-    'ecmaVersion': 12
+    'ecmaFeatures': {
+      'jsx': true
+    },
+    'ecmaVersion': 2018,
+    'sourceType': 'module'
   },
+  'plugins': [
+    'react', 'jest'
+  ],
   'rules': {
-    'eqeqeq': 'error',
-    'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-      'error', 'always'
-    ],
-    'arrow-spacing': [
-      'error', { 'before': true, 'after': true }
-    ],
-    'no-console': 0,
     'indent': [
       'error',
-      2
-    ],
+        2
+      ],
     'linebreak-style': [
       'error',
       'unix'
@@ -34,6 +44,16 @@ module.exports = {
     'semi': [
       'error',
       'never'
-    ]
+    ],
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+      'error', 'always'
+    ],
+    'arrow-spacing': [
+      'error', { 'before': true, 'after': true }
+    ],
+    'no-console': 0,
+    'react/prop-types': 0
   }
 }

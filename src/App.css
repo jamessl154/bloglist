@@ -1,0 +1,163 @@
+/* https://stackoverflow.com/a/45271587 */
+
+/* https://www.youtube.com/watch?v=Qhaz36TZG5Y */
+
+/* https://www.youtube.com/watch?v=xIIJfmDnvPE */
+
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200&display=swap');
+
+.empty {
+    visibility: hidden;
+}
+
+.blog {
+    display: flex;
+    flex-direction: column;
+    border: 0.5rem outset rgb(134, 134, 134);
+    line-height: 1.5rem;
+    width: 230px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.blogHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blogTitle {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.expandedBlog {
+    color: white;
+    font-size: 15px;
+}
+
+.notification {
+    border-radius: 20px;
+    padding: 20px 0 4vh 0;
+}
+
+.rightAlignButton {
+    float: right;
+}
+
+.blog-container {
+    background-color: hsl(209, 90%, 30%);
+    border-radius: 15px;
+    padding: clamp(10px, 4vw, 40px);
+}
+
+.frontpage-title-text {
+    font-weight: 600;
+    font-size: clamp(50px, 6vw, 80px);
+    text-align: center;
+    color: white;
+    padding-top: 60px;
+}
+
+.center-form {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.input-fields {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: clamp(10em, 50vw, 20em);
+}
+
+.frontpage-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 30px 0;
+}
+
+.button-gap {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.pageTitle {
+    font-weight: 600;
+    font-size: clamp(70px, 8vw, 80px);
+    color: white;
+    padding: 60px 0 60px 0;
+}
+
+html * {
+    font-family: 'Inconsolata';
+}
+
+.navigationBar {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 600px;
+    background-color: rgb(134, 134, 134);
+    padding: 0 15px 0 15px;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.logout {
+    padding: 15px 0 15px 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    font-size: 20px;
+}
+
+.logoutText {
+    margin-right: 10px;
+}
+
+.navButtons {
+    padding: 15px 0 15px 0;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.blogGrid {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 60px;
+}
+
+.usersTable {
+    color: white;
+    font-size: 20px;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 10px;
+}
+
+.whiteText {
+    color: white;
+}
+
+.smallPageTitle {
+    font-weight: 600;
+    padding: 40px 0 40px 0;
+    font-size: 30px
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+.commentButton {
+    padding: 40px 0 40px
+}
