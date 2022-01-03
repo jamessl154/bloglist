@@ -10,12 +10,33 @@
     visibility: hidden;
 }
 
+/* https://www.freecodecamp.org/news/how-to-keep-your-footer-where-it-belongs-59c6aa05c59c/ */
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+}
+
+#root {
+    padding-bottom: 2.5rem;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
 .blog {
     display: flex;
     flex-direction: column;
     border: 0.5rem outset rgb(134, 134, 134);
     line-height: 1.5rem;
-    width: 230px;
+    width: 250px;
     padding: 10px;
     margin-bottom: 10px;
     margin-right: 10px;

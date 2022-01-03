@@ -5,7 +5,7 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import Blog from './Blog'
 

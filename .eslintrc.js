@@ -2,7 +2,8 @@ module.exports = {
   'env': {
     'browser': true,
     'es6': true,
-    'jest/globals': true
+    'jest/globals': true,
+    'node': true
   },
   // https://eslint.org/docs/rules/no-process-env
   'globals': {
@@ -31,8 +32,8 @@ module.exports = {
   'rules': {
     'indent': [
       'error',
-        2
-      ],
+      2
+    ],
     'linebreak-style': [
       'error',
       'unix'

@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 
 import blogService from './services/blogService'
 import LoginForm from './components/LoginForm'
-import BlogDisplay from './components/BlogDisplay'
+import BlogList from './components/BlogList'
 import Notification from './components/Notification'
 import FrontPage from './components/FrontPage'
 import RegisterForm from './components/RegisterForm'
@@ -47,7 +47,7 @@ const App = () => {
               <RegisterForm />
             </Route>
             <Route exact path='/blogs'>
-              {user ? <BlogDisplay /> : <Redirect to="/" />}
+              {user ? <BlogList /> : <Redirect to="/" />}
             </Route>
             {/* default route, binds to any route that isn't included above */}
             <Route path="/">

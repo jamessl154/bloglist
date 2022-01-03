@@ -1,26 +1,23 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Switch, useHistory, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import Blog from './Blog'
-import AddBlogForm from './AddBlogForm'
-import Togglable from './Togglable'
 import UserDisplay from './UserDisplay'
 import User from './User'
 import SingleBlog from './SingleBlog'
+import BlogDisplay from './BlogDisplay'
 import NavBar from './NavBar'
 import { postBlog, deleteBlog, likeBlog } from '../reducers/blogsReducer'
 import { notifyWith } from '../reducers/notificationReducer'
 import { initializeUsers, removeFromBlogsArray } from '../reducers/usersReducer'
 import { resetUser } from '../reducers/userReducer'
 
-const BlogDisplay = () => {
+const BlogList = () => {
   const dispatch = useDispatch()
   const history = useHistory()
   const blogs = useSelector(state => state.blogs)
   const user = useSelector(state => state.user)
   const users = useSelector(state => state.users)
-  const toggleRef = useRef()
 
   useEffect(() => {
     dispatch(initializeUsers())
@@ -67,27 +64,13 @@ const BlogDisplay = () => {
         <NavBar username={user.username} handleLogout={handleLogout} />
         <Switch>
           <Route exact path="/blogs">
-            <div className='pageTitle'>Blogs</div>
-            <div className='blogGrid'>
-              {blogs.map(blog =>
-                <Blog
-                  key={blog.id}
-                  blog={blog}
-                  user={user}
-                  handleLike={() => handleLike(blog)}
-                  handleRemove={() => handleRemove(blog)}
-                />)}
-            </div>
-            <Togglable
-              buttonLabel="Add a new Blog"
-              ref={toggleRef}
-            >
-              {/*
-                pass toggleRef as a ref to Togglable
-                but as a prop to AddBlogForm
-              */}
-              <AddBlogForm handleAdd={handleAdd} toggleRef={toggleRef} />
-            </Togglable>
+            <BlogDisplay
+              handleAdd={handleAdd}
+              handleRemove={handleRemove}
+              handleLike={handleLike}
+              user={user}
+              blogs={blogs}
+            />
           </Route>
           <Route exact path='/blogs/:id'>
             <SingleBlog blogs={blogs} handleLike={handleLike} />
@@ -104,4 +87,4 @@ const BlogDisplay = () => {
   )
 }
 
-export default BlogDisplay
+export default BlogList

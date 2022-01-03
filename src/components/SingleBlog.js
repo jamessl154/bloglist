@@ -26,7 +26,7 @@ const SingleBlog = ({ blogs, handleLike }) => {
     return (
       <div className='whiteText'>
         <div className="smallPageTitle">&quot;{blog.title}&quot; by {blog.author}</div>
-        Url:{' '}<Link underline='always' color="secondary" href={blog.url}>{blog.url}</Link><br />
+        Url:{' '}<Link underline='always' color="secondary" target='_blank' href={blog.url}>{blog.url}</Link><br />
         Total Likes: {blog.likes}{' '}
         <Button onClick={() => handleLike(blog)}>&#128077;</Button>
         <br />
