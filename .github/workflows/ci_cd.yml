@@ -30,6 +30,8 @@ jobs:
         run: npm run lint
       - name: jest integration/component tests
         run: npm run test
+      - name: build
+        run: npm run build
       - name: cypress e2e tests
         uses: cypress-io/github-action@v2
         with:
