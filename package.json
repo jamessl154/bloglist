@@ -12,7 +12,8 @@
         "lint": "eslint .",
         "start:test": "NODE_ENV=test node index.js",
         "cypress:open": "cypress open",
-        "test:e2e": "cypress run --record"
+        "test:e2e": "cypress run --record",
+        "test:e2e-local": "cypress run"
     },
     "author": "jamessl154",
     "license": "MIT",

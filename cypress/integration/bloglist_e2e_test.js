@@ -199,9 +199,9 @@ describe('On visit to the blog app,', function() {
       cy.get('[data-cy=sardiniaTestTitle]').find('[data-cy=likeButton]').click()
       // wait 1 second after clicks
       cy.wait(100)
-      cy.get('.blog:first')
+      cy.get('.blogHeader:first')
         .contains('sardiniaTestTitle')
-      cy.get('.blog:first')
+      cy.get('.expandedBlog:first')
         .contains('Total Likes: 1')
   
       // After liking the cypress blog twice, it goes on top again
@@ -209,16 +209,16 @@ describe('On visit to the blog app,', function() {
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
       cy.wait(100)
       // blogs with the same likes are not re-sorted
-      cy.get('.blog:first')
+      cy.get('.blogHeader:first')
         .contains('sardiniaTestTitle')
-      cy.get('.blog:first')
+      cy.get('.expandedBlog:first')
         .contains('Total Likes: 1')
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
       cy.wait(100)
       // cypress has 2 likes and sardinia has 1, cypress is on top
-      cy.get('.blog:first')
+      cy.get('.blogHeader:first')
         .contains('cypressTestTitle')
-      cy.get('.blog:first')
+      cy.get('.expandedBlog:first')
         .contains('Total Likes: 2')
     })
   })
