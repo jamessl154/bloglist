@@ -50,7 +50,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name:
           heroku_email: ${{ secrets.EMAIL }}
-          healthcheck: "https://infinite-ravine-93237.herokuapp.com/health"
+          healthcheck: "https://glacial-scrubland-84995.herokuapp.com/health"
           checkstring: "Healthy!"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
