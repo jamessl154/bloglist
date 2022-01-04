@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
- 
+
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -16,6 +16,14 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      # https://stackoverflow.com/a/61485186
+      - name: create env file
+        run: |
+          touch .env
+          echo MONGODB_URI=${{ secrets.MONGODB_URI }} >> .env
+          echo TEST_MONGODB_URI=${{ secrets.TEST_MONGODB_URI }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          echo SECRET=${{ secrets.SECRET }} >> .env
       - name: npm install
         run: npm install
       - name: lint
