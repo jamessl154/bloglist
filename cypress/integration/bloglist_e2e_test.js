@@ -180,6 +180,7 @@ describe('On visit to the blog app,', function() {
   
       cy.createBlog(blog1)
       cy.createBlog(blog2)
+      cy.visit('http://localhost:3003')
       cy.contains('+').click()
       // first view disappears
       cy.contains('+').click()
