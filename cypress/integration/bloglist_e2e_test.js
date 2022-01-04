@@ -200,8 +200,8 @@ describe('On visit to the blog app,', function() {
       // add like to sardinia blog, expect it to now be on top
       cy.get('[data-cy=sardiniaTestTitle]').find('[data-cy=likeButton]').click()
 
-      // wait 1 second after clicks
-      cy.wait(100)
+      // wait 5 second after clicks
+      cy.wait(500)
       cy.get('.blog')
         .eq(0)
         .contains('sardiniaTestTitle')
@@ -213,7 +213,7 @@ describe('On visit to the blog app,', function() {
       // which confirms that blogs are being re-sorted by most number of likes
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
 
-      cy.wait(100)
+      cy.wait(500)
       // blogs with the same likes are not yet re-sorted
       cy.get('.blog')
         .eq(0)
@@ -224,7 +224,7 @@ describe('On visit to the blog app,', function() {
 
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
 
-      cy.wait(100)
+      cy.wait(500)
       // cypress has 2 likes and sardinia has 1, cypress is on top
       cy.get('.blog')
         .eq(0)
