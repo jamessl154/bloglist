@@ -188,37 +188,49 @@ describe('On visit to the blog app,', function() {
     it('blogs are re-sorted by number of likes', function() {
   
       // getting the first element with .blog class on the page
-      cy.get('.blog:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('cypressTestTitle')
-      cy.get('.blog:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('Total Likes: 0')
   
       // sardinia blog is initially underneath cypress blog
   
       // add like to sardinia blog, expect it to now be on top
       cy.get('[data-cy=sardiniaTestTitle]').find('[data-cy=likeButton]').click()
+
       // wait 1 second after clicks
       cy.wait(100)
-      cy.get('.blogHeader:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('sardiniaTestTitle')
-      cy.get('.expandedBlog:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('Total Likes: 1')
   
       // After liking the cypress blog twice, it goes on top again
       // which confirms that blogs are being re-sorted by most number of likes
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
+
       cy.wait(100)
-      // blogs with the same likes are not re-sorted
-      cy.get('.blogHeader:first')
+      // blogs with the same likes are not yet re-sorted
+      cy.get('.blog')
+        .eq(0)
         .contains('sardiniaTestTitle')
-      cy.get('.expandedBlog:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('Total Likes: 1')
+
       cy.get('[data-cy=cypressTestTitle]').find('[data-cy=likeButton]').click()
+
       cy.wait(100)
       // cypress has 2 likes and sardinia has 1, cypress is on top
-      cy.get('.blogHeader:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('cypressTestTitle')
-      cy.get('.expandedBlog:first')
+      cy.get('.blog')
+        .eq(0)
         .contains('Total Likes: 2')
     })
   })
