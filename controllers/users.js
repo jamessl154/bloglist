@@ -5,12 +5,12 @@ const helper = require('../utils/api_test_helper')
 const jwt = require('jsonwebtoken')
 
 usersRouter.post('/', async (request, response, next) => {
-  const body = request.body
+  const { password, username, name } = request.body
 
   // Regex checker for password strength before the password is hashed
-  const testPass = helper.strongPassword(body.password)
+  const testPass = helper.strongPassword(password)
 
-  const takenUsername = await User.findOne({ username: body.username })
+  const takenUsername = await User.findOne({ username })
 
   if (takenUsername) {
     return response.status(409).json({
@@ -26,11 +26,11 @@ usersRouter.post('/', async (request, response, next) => {
   }
 
   const saltRounds = 10
-  const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, saltRounds)
 
   const user = new User({
-    username: body.username,
-    name: body.name,
+    username: username,
+    name: name,
     passwordHash,
   })
 

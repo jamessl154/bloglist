@@ -38,6 +38,11 @@ jobs:
           start: npm run start:test
           command: npm run test:e2e
           wait-on: 'http://localhost:3003'
+          record: true
+        env:
+          # https://www.youtube.com/watch?v=Oqq-_QZWzhg
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
