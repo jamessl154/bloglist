@@ -53,6 +53,8 @@ Backend: https://github.com/jamessl154/fullstackopen/tree/main/part4/bloglist
 
 Frontend: https://github.com/jamessl154/fullstackopen/tree/main/part5/bloglist-frontend
 
+Fullstackopen: https://fullstackopen.com/en/
+
 ## How to run locally
 
 1. clone repository
