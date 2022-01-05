@@ -61,7 +61,7 @@ Fullstackopen: https://fullstackopen.com/en/
 2. run `npm install`
 
 3. create .env file at the root of the repository
-### Must include:
+### .env Must include:
 ---
 ```
   MONGODB_URI: The URI of your MongoDB database used in production and development
