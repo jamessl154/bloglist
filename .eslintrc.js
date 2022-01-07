@@ -19,7 +19,9 @@ module.exports = {
       'version': 'detect',
     },
   },
+  'parser': '@babel/eslint-parser',
   'parserOptions': {
+    'allowImportExportEverywhere': true,
     'ecmaFeatures': {
       'jsx': true
     },

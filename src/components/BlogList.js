@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { BrowserRouter as Router, Switch, useHistory, Route } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
-import UserDisplay from './UserDisplay'
-import User from './User'
-import SingleBlog from './SingleBlog'
-import BlogDisplay from './BlogDisplay'
-import NavBar from './NavBar'
+const UserDisplay = React.lazy(() => import(/* webpackPrefetch: true */ './UserDisplay'))
+const User = React.lazy(() => import(/* webpackPrefetch: true */ './User'))
+const SingleBlog = React.lazy(() => import(/* webpackPrefetch: true */ './SingleBlog'))
+const BlogDisplay = React.lazy(() => import(/* webpackPrefetch: true */ './BlogDisplay'))
+const NavBar = React.lazy(() => import(/* webpackPrefetch: true */ './NavBar'))
+import Loading from './Loading'
 import { postBlog, deleteBlog, likeBlog } from '../reducers/blogsReducer'
 import { notifyWith } from '../reducers/notificationReducer'
 import { initializeUsers, removeFromBlogsArray } from '../reducers/usersReducer'
@@ -61,27 +62,29 @@ const BlogList = () => {
   return (
     <div>
       <Router>
-        <NavBar username={user.username} handleLogout={handleLogout} />
-        <Switch>
-          <Route exact path="/blogs">
-            <BlogDisplay
-              handleAdd={handleAdd}
-              handleRemove={handleRemove}
-              handleLike={handleLike}
-              user={user}
-              blogs={blogs}
-            />
-          </Route>
-          <Route exact path='/blogs/:id'>
-            <SingleBlog blogs={blogs} handleLike={handleLike} />
-          </Route>
-          <Route exact path="/users">
-            <UserDisplay users={users}/>
-          </Route>
-          <Route exact path="/users/:id">
-            <User users={users} />
-          </Route>
-        </Switch>
+        <Suspense fallback={<Loading />}>
+          <NavBar username={user.username} handleLogout={handleLogout} />
+          <Switch>
+            <Route exact path="/blogs">
+              <BlogDisplay
+                handleAdd={handleAdd}
+                handleRemove={handleRemove}
+                handleLike={handleLike}
+                user={user}
+                blogs={blogs}
+              />
+            </Route>
+            <Route exact path='/blogs/:id'>
+              <SingleBlog blogs={blogs} handleLike={handleLike} />
+            </Route>
+            <Route exact path="/users">
+              <UserDisplay users={users}/>
+            </Route>
+            <Route exact path="/users/:id">
+              <User users={users} />
+            </Route>
+          </Switch>
+        </Suspense>
       </Router>
     </div>
   )

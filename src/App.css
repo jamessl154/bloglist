@@ -73,6 +73,22 @@ footer {
     padding: clamp(10px, 4vw, 40px);
 }
 
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 100px;
+    font-size: clamp(50px, 6vw, 80px);
+    font-weight: 600;
+    color: hsl(209, 90%, 30%);
+}
+
+.loading-container {
+    background-color: hsl(209, 90%, 30%);
+    border-radius: 15px;
+    padding: clamp(10px, 4vw, 40px);
+}
+
 .frontpage-title-text {
     font-weight: 600;
     font-size: clamp(50px, 6vw, 80px);
