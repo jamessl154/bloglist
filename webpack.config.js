@@ -20,9 +20,15 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
+    // https://webpack.js.org/guides/caching/
+    // recommended to use contenthash in production for caching, the hash only changes when the asset's content changes
+    // https://webpack.js.org/concepts/under-the-hood/#output
+    // initial chunk: entry point
     filename: '[name].[contenthash:8].bundle.js',
+    // non-initial chunk:
     chunkFilename: '[name].[contenthash:8].chunk.js',
     publicPath: '/',
+    // after build, removes unused files in dist/
     clean: true
   },
   module: {
@@ -37,7 +43,10 @@ module.exports = {
         use: 'html-loader',
       },
       {
+        // regex test
         test: /\.css$/,
+        // do not use style-loader and mini-css-extract-plugin together
+        // The loaders run in reverse array order
         use: [MiniCssExtractPlugin.loader, "css-loader"]
       }
     ],
@@ -48,10 +57,13 @@ module.exports = {
   optimization: {
     minimizer: [
       // https://webpack.js.org/plugins/css-minimizer-webpack-plugin/
+      // this line extends existing minimizers
       '...',
+      // minifies css files
       new CssMinimizerPlugin()
     ],
     splitChunks: {
+      // which chunks will be selected for optimization
       chunks: 'all',
     },
   },
@@ -64,6 +76,8 @@ module.exports = {
       filename: './index.html'
     }),
     // new WebpackBundleAnalyzer(),
+    // extracts css into its own file that is run before the js bundles are injected
+    // which prevents styles flickering
     new MiniCssExtractPlugin({ filename: "[name].[contenthash:8].css"})
   ],
 };
