@@ -3,7 +3,7 @@ https://fullstackopen.com/en/part11
 
 ![bloglist](https://github.com/jamessl154/bloglist/actions/workflows/ci_cd.yml/badge.svg)
 
-This project is the final exercise from part11 to develop a single repository application with a CI/CD-pipeline. The workflow is found in `.github/workflows/ci_cd.yml`. It transfers repository secrets into a ```.env``` file, installs dependencies, lints the code, tests the code with Jest and Cypress, builds the frontend using Webpack, deploys to Heroku and bumps the version.
+This project is the final exercise from part [11](https://github.com/jamessl154/full-stack-open-pokedex) to develop a single repository application with a CI/CD-pipeline. The workflow is found in `.github/workflows/ci_cd.yml`. It transfers repository secrets into a ```.env``` file, installs dependencies, lints the code, tests the code with Jest and Cypress, builds the frontend using Webpack, deploys to Heroku and bumps the version.
 
 ---
 
